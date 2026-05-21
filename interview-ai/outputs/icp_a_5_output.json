@@ -1,0 +1,73 @@
+{
+  "case": "icp_a_5.json",
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Data Engineer",
+    "round_type": "technical",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "Imagine you are designing a data pipeline to ingest high-velocity clickstream data into a cloud data warehouse for analytical reporting. Walk me through your choice of ingestion and storage tools, and explain how you would handle data deduplication and schema evolution in this pipeline.",
+      "question_type": "technical",
+      "difficulty_level": 3,
+      "reasoning": "First question of the technical round for a high-wage Data Engineer candidate. Setting baseline difficulty at 3 to assess pipeline design, tool selection, schema evolution, and data quality handling (deduplication) in a mid-tier company context."
+    },
+    {
+      "next_question": "You mentioned using Pandas for cleaning and merging datasets. Since Pandas operates entirely in-memory, how would you handle a situation where the volume of the dataset exceeds your machine's memory, or how would you optimize this cleaning process for a production-level pipeline?",
+      "question_type": "follow_up",
+      "difficulty_level": 3,
+      "reasoning": "Answer was weak because the candidate bypassed the core high-velocity streaming architecture requirements (ingestion, deduplication, schema evolution) and gave a very brief response about basic, in-memory Pandas operations. Probing same gap at lower difficulty by asking how they scale or productionize their preferred tool (Pandas) for larger data volumes."
+    },
+    {
+      "next_question": "You mentioned scheduling a 500k-row pipeline using Pandas and cron. If that data volume suddenly grew to 50 million rows and caused an 'Out of Memory' error in your Pandas script, what is the very first modification you would make to your Python code to process this data in smaller batches, or what alternative Python-friendly tool would you swap in to handle it?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate bypassed the memory-limit question and instead cited a low-volume (500k rows) batch job scheduled via cron. Probing same gap at lower difficulty by asking for direct, practical workarounds for memory issues (like pandas chunking or alternative libraries) in a Python context."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "Imagine you are designing a data pipeline to ingest high-velocity clickstream data into a cloud data warehouse for analytical reporting. Walk me through your choice of ingestion and storage tools, and explain how you would handle data deduplication and schema evolution in this pipeline.",
+      "answer": "I've used Python with pandas for data cleaning. Removed nulls, normalized columns, merged datasets."
+    },
+    {
+      "question": "You mentioned using Pandas for cleaning and merging datasets. Since Pandas operates entirely in-memory, how would you handle a situation where the volume of the dataset exceeds your machine's memory, or how would you optimize this cleaning process for a production-level pipeline?",
+      "answer": "I built a pipeline using pandas and scheduled it with cron. The pipeline processed 500k rows daily."
+    },
+    {
+      "question": "You mentioned scheduling a 500k-row pipeline using Pandas and cron. If that data volume suddenly grew to 50 million rows and caused an 'Out of Memory' error in your Pandas script, what is the very first modification you would make to your Python code to process this data in smaller batches, or what alternative Python-friendly tool would you swap in to handle it?",
+      "answer": "I know SQL well. I've written complex joins, window functions, and CTEs for analytics queries."
+    }
+  ],
+  "score_report": {
+    "overall_score": 25,
+    "scores_per_axis": {
+      "communication": 30,
+      "technical": 20,
+      "problem_solving": 15,
+      "behavioral": 30,
+      "delivery": 30
+    },
+    "gap_vs_bar": {
+      "communication": -40,
+      "technical": -45,
+      "problem_solving": -55,
+      "behavioral": -35,
+      "delivery": -30
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "I know SQL well. I've written complex joins, window functions, and CTEs for analytics queries.",
+      "why_it_hurt": "The candidate completely evaded a direct question on resolving an Out-of-Memory error when scaling from 500k to 50 million rows, pivoting instead to unrelated SQL skills. This demonstrates a critical lack of knowledge in memory management, data scaling, and troubleshooting.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "I built a pipeline using pandas and scheduled it with cron. The pipeline processed 500k rows daily.",
+      "why_it_helped": "This indicates that the candidate has practical, hands-on experience setting up basic end-to-end automation and scheduling workflows for small-scale datasets.",
+      "quote_verified": true
+    },
+    "next_action": "Practice structured technical scenario problem-solving. Specifically, run through mock drills on how to scale Python pipelines, contrasting in-memory chunking (e.g., Pandas chunksize) with distributed computing frameworks like PySpark."
+  }
+}

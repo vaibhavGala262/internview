@@ -1,0 +1,73 @@
+{
+  "case": "icp_a_2.json",
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "technical",
+    "company_tier": "startup",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "At a fast-growing startup, we often have to trade off perfect architecture for speed, while still ensuring reliability. Let's say we need to build a real-time notification system that handles millions of events per day. How would you design this system, and which technologies (e.g., message queues, caching layers, protocols) would you select to ensure low latency and high availability under sudden traffic spikes?",
+      "question_type": "technical",
+      "difficulty_level": 3,
+      "reasoning": "No previous answers exist. Initializing the technical round at difficulty 3 for a high-wage software engineer role. The question targets practical system design and technology trade-offs, which aligns with a startup environment."
+    },
+    {
+      "next_question": "Understood. Let's simplify the scenario. Imagine we have a single server receiving a sudden spike of notification events, and we want to process them asynchronously so we don't block the main execution thread. How would you implement a basic producer-consumer queue in memory to handle this? What data structure would you use, and how would you ensure we don't lose tasks if the memory limit is reached?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate gave an off-topic response about binary search and O(log n) time complexity, completely bypassing the system design question about a real-time notification system. Probing same gap at lower difficulty by asking for a basic, localized producer-consumer queue design instead of a distributed architecture."
+    },
+    {
+      "next_question": "Since you mentioned working with arrays, let's strip things back to basic data structures. In system design and asynchronous processing, we rely heavily on Queues and Stacks. Can you explain the fundamental difference between a Queue (FIFO) and a Stack (LIFO), and provide a simple, real-world scenario where you would choose a Queue over a Stack?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate completely ignored the question about implementing an in-memory producer-consumer queue and instead continued discussing iterative vs. recursive binary search from their first response. Probing the same conceptual gap (queues and data processing) at the lowest difficulty level by asking for the fundamental difference between a Queue and a Stack."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "At a fast-growing startup, we often have to trade off perfect architecture for speed, while still ensuring reliability. Let's say we need to build a real-time notification system that handles millions of events per day. How would you design this system, and which technologies (e.g., message queues, caching layers, protocols) would you select to ensure low latency and high availability under sudden traffic spikes?",
+      "answer": "I've implemented binary search and sorted arrays. Time complexity is O(log n)."
+    },
+    {
+      "question": "Understood. Let's simplify the scenario. Imagine we have a single server receiving a sudden spike of notification events, and we want to process them asynchronously so we don't block the main execution thread. How would you implement a basic producer-consumer queue in memory to handle this? What data structure would you use, and how would you ensure we don't lose tasks if the memory limit is reached?",
+      "answer": "For the binary search I wrote it recursively first, then iteratively. The iterative version is better for large inputs because it avoids stack overflow."
+    },
+    {
+      "question": "Since you mentioned working with arrays, let's strip things back to basic data structures. In system design and asynchronous processing, we rely heavily on Queues and Stacks. Can you explain the fundamental difference between a Queue (FIFO) and a Stack (LIFO), and provide a simple, real-world scenario where you would choose a Queue over a Stack?",
+      "answer": "I haven't worked with graphs much. I know BFS and DFS exist but haven't implemented them."
+    }
+  ],
+  "score_report": {
+    "overall_score": 12,
+    "scores_per_axis": {
+      "communication": 15,
+      "technical": 10,
+      "problem_solving": 5,
+      "behavioral": 10,
+      "delivery": 20
+    },
+    "gap_vs_bar": {
+      "communication": -55,
+      "technical": -55,
+      "problem_solving": -65,
+      "behavioral": -55,
+      "delivery": -40
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "I haven't worked with graphs much. I know BFS and DFS exist but haven't implemented them.",
+      "why_it_hurt": "The candidate completely failed to answer a foundational question about Stacks and Queues, instead pivoting to graphs and BFS/DFS. This demonstrates a severe gap in basic data structure knowledge and an inability to address the interviewer's question directly.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "The iterative version is better for large inputs because it avoids stack overflow.",
+      "why_it_helped": "While completely irrelevant to the actual question about producer-consumer queues, this specific statement correctly identifies a basic technical trade-off regarding recursion versus iteration.",
+      "quote_verified": true
+    },
+    "next_action": "Practice active listening drills where you summarize the interviewer's question before answering, and study basic data structures (Queues, Stacks, Hash Maps) to ensure you can define and apply them correctly rather than reciting unrelated memorized topics."
+  }
+}

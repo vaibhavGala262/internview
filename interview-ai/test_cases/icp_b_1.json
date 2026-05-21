@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Data Entry Executive",
+    "round_type": "screening",
+    "company_tier": "startup",
+    "language": "hi"
+  },
+  "mock_answers": [
+    "मैं पिछले 2 साल से delivery का काम कर रहा हूं। रोज़ 10-12 घंटे काम करता हूं। Office job चाहिए क्योंकि family को stability चाहिए।",
+    "Computer थोड़ा-थोड़ा use करता हूं। Phone पर WhatsApp, Google Maps चलाता हूं। Excel थोड़ा सीखा है।",
+    "मुझे नहीं पता data entry में क्या होता है। बस type करना होता है शायद।"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Backend Engineer",
+    "round_type": "technical",
+    "company_tier": "enterprise",
+    "language": "en"
+  },
+  "mock_answers": [
+    "I've worked with microservices. Each service owns its own database. We used RabbitMQ for async communication.",
+    "For the RabbitMQ setup I configured dead letter queues, set up consumer groups, and handled message retry logic with exponential backoff.",
+    "I'm not very confident about distributed transactions. I know about 2PC but I've never implemented it."
+  ]
+}

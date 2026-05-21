@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "behavioral",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "mock_answers": [
+    "I worked on a group project where I had to lead the backend. I organized the work using GitHub issues and daily standups.",
+    "When a teammate was stuck on authentication, I pair programmed with them and helped them understand JWT tokens.",
+    "I don't handle conflict well. I usually just do the work myself instead of arguing."
+  ]
+}

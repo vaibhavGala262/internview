@@ -1,0 +1,73 @@
+{
+  "case": "icp_b_4.json",
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "CX Associate",
+    "round_type": "behavioral",
+    "company_tier": "enterprise",
+    "language": "hi"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "नमस्ते! बहुत अच्छा लगा आपसे मिलकर। CX एसोसिएट के तौर पर आपको अक्सर अलग-अलग तरह के ग्राहकों से बात करनी पड़ेगी। मान लीजिए अगर कोई ग्राहक बहुत गुस्से में कॉल करे और अपनी समस्या के लिए आप पर चिल्लाने लगे, तो ऐसी स्थिति को संभालने के लिए आप क्या करेंगे?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "This is the opening question for a low_wage, behavioral interview. Since there are no previous answers, I am starting with a foundational scenario-based question to gauge how the candidate handles stress and customer interactions, which is essential for a CX Associate role in an enterprise setting."
+    },
+    {
+      "next_question": "मैं समझ सकता हूँ कि आप लोगों से बात करने में सहज हैं, जो कि एक बहुत अच्छी खूबी है। लेकिन कल्पना कीजिए कि एक ग्राहक बहुत परेशान है क्योंकि उनका पार्सल नहीं मिला है और वो आप पर चिल्ला रहे हैं। आप उन्हें शांत करने के लिए सबसे पहले उनसे क्या कहेंगे? कृपया कोई एक उदाहरण दें कि आप उनसे बातचीत की शुरुआत कैसे करेंगे।",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate gave a generic statement about comfort with people without addressing the specific 'angry customer' scenario. Probing same gap at lower difficulty to get a concrete response."
+    },
+    {
+      "next_question": "आपकी यह बात सुनकर अच्छा लगा कि आपने दबाव में काम किया है। लेकिन अभी जो मैंने आपसे ग्राहक के गुस्से के बारे में पूछा था, उसका जवाब मुझे नहीं मिल पाया। अगर कोई ग्राहक चिल्ला रहा हो, तो आप उनसे फोन पर क्या कहेंगे ताकि वे शांत हो जाएं? आप बस यह बताइए कि आप अपनी बातचीत की शुरुआत किन शब्दों से करेंगे?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate ignored the behavioral scenario about handling an angry customer and instead gave an example of time management from a delivery context. Probing the same gap at a lower difficulty to see if they can roleplay the communication part."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "नमस्ते! बहुत अच्छा लगा आपसे मिलकर। CX एसोसिएट के तौर पर आपको अक्सर अलग-अलग तरह के ग्राहकों से बात करनी पड़ेगी। मान लीजिए अगर कोई ग्राहक बहुत गुस्से में कॉल करे और अपनी समस्या के लिए आप पर चिल्लाने लगे, तो ऐसी स्थिति को संभालने के लिए आप क्या करेंगे?",
+      "answer": "Customer support का experience नहीं है लेकिन लोगों से बात करने में comfortable हूं।"
+    },
+    {
+      "question": "मैं समझ सकता हूँ कि आप लोगों से बात करने में सहज हैं, जो कि एक बहुत अच्छी खूबी है। लेकिन कल्पना कीजिए कि एक ग्राहक बहुत परेशान है क्योंकि उनका पार्सल नहीं मिला है और वो आप पर चिल्ला रहे हैं। आप उन्हें शांत करने के लिए सबसे पहले उनसे क्या कहेंगे? कृपया कोई एक उदाहरण दें कि आप उनसे बातचीत की शुरुआत कैसे करेंगे।",
+      "answer": "एक बार मेरे area में बहुत orders थे और मैं अकेला था। मैंने priority set की और सबसे पहले time-sensitive orders deliver किए।"
+    },
+    {
+      "question": "आपकी यह बात सुनकर अच्छा लगा कि आपने दबाव में काम किया है। लेकिन अभी जो मैंने आपसे ग्राहक के गुस्से के बारे में पूछा था, उसका जवाब मुझे नहीं मिल पाया। अगर कोई ग्राहक चिल्ला रहा हो, तो आप उनसे फोन पर क्या कहेंगे ताकि वे शांत हो जाएं? आप बस यह बताइए कि आप अपनी बातचीत की शुरुआत किन शब्दों से करेंगे?",
+      "answer": "अगर कोई मुझसे रूड बात करे तो मैं शांत रहूंगा और professional तरीके से handle करूंगा। Customer हमेशा सही नहीं होता पर हमें ऐसा ही treat करना है।"
+    }
+  ],
+  "score_report": {
+    "overall_score": 35,
+    "scores_per_axis": {
+      "communication": 40,
+      "technical": 30,
+      "problem_solving": 30,
+      "behavioral": 35,
+      "delivery": 40
+    },
+    "gap_vs_bar": {
+      "communication": -20,
+      "technical": -10,
+      "problem_solving": -25,
+      "behavioral": -30,
+      "delivery": -15
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q2 answer",
+      "quote": "एक बार मेरे area में बहुत orders थे और मैं अकेला था। मैंने priority set की और सबसे पहले time-sensitive orders deliver किए।",
+      "why_it_hurt": "आप सवाल का जवाब देने के बजाय अपनी पुरानी नौकरी के काम के बारे में बताने लगे। इससे पता चला कि आप ग्राहक के गुस्से को संभालने वाली स्थिति को समझ नहीं पा रहे हैं।",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "अगर कोई मुझसे रूड बात करे तो मैं शांत रहूंगा और professional तरीके से handle करूंगा।",
+      "why_it_helped": "यह आपके धैर्य और पेशेवर व्यवहार को दिखाता है, जो एक CX एसोसिएट के लिए बहुत ज़रूरी है।",
+      "quote_verified": true
+    },
+    "next_action": "अगले 2 दिनों तक, एक दोस्त की मदद से 'Angry Customer Scripting' की प्रैक्टिस करें—आपको 'मैं समझ सकता हूँ कि आप परेशान हैं, चलिए हम साथ मिलकर इस समस्या का समाधान ढूँढते हैं' जैसे वाक्यों को बोलने का अभ्यास करना चाहिए।"
+  }
+}

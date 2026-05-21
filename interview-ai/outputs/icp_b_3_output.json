@@ -1,0 +1,73 @@
+{
+  "case": "icp_b_3.json",
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Office Assistant",
+    "round_type": "screening",
+    "company_tier": "mid",
+    "language": "hi"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "नमस्ते! आपका स्वागत है। ऑफिस असिस्टेंट की इस भूमिका के लिए, क्या आप मुझे अपने पिछले काम या किसी ऐसे अनुभव के बारे में बता सकते हैं जहाँ आपको ऑफिस का काम संभालने या फाइल्स मैनेज करने में मदद करनी पड़ी हो?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "यह पहला प्रश्न है, इसलिए उम्मीदवार के पिछले अनुभव और बेसिक स्किल्स (फाइल मैनेजमेंट, ऑफिस वर्क) को समझने के लिए एक शुरुआती स्क्रीनिंग प्रश्न चुना गया है।"
+    },
+    {
+      "next_question": "बहुत बढ़िया। कंप्यूटर सीखने की आपकी इच्छा अच्छी है। क्या आपने पहले कभी ऑफिस में किसी सॉफ्टवेयर का इस्तेमाल किया है, जैसे कि फाइल्स को सेव करना, या कभी कंप्यूटर पर कोई बेसिक काम जैसे ईमेल चेक करना या टाइपिंग की कोशिश की है?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate gave a general statement about their education and desire to learn, rather than describing specific experience with office tasks or file management. Probing same gap at lower difficulty to identify any baseline practical skills."
+    },
+    {
+      "next_question": "यह जानकर अच्छा लगा कि आप समय के पाबंद हैं, यह बहुत जरूरी गुण है। मेरा सवाल यह था कि क्या आपने कभी कंप्यूटर पर फाइल्स सेव करना या टाइपिंग जैसे काम करने की कोशिश की है? अगर नहीं भी की है, तो क्या आप काम के दौरान नई चीजें सीखने के लिए तैयार हैं?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate ignored the technical question about software and typing, and instead focused on behavioral traits. Probing same gap at lower difficulty to get a clear answer regarding their current computer comfort level."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "नमस्ते! आपका स्वागत है। ऑफिस असिस्टेंट की इस भूमिका के लिए, क्या आप मुझे अपने पिछले काम या किसी ऐसे अनुभव के बारे में बता सकते हैं जहाँ आपको ऑफिस का काम संभालने या फाइल्स मैनेज करने में मदद करनी पड़ी हो?",
+      "answer": "मैं पढ़ा-लिखा हूं, 12th pass हूं। Computer सीखना चाहता हूं।"
+    },
+    {
+      "question": "बहुत बढ़िया। कंप्यूटर सीखने की आपकी इच्छा अच्छी है। क्या आपने पहले कभी ऑफिस में किसी सॉफ्टवेयर का इस्तेमाल किया है, जैसे कि फाइल्स को सेव करना, या कभी कंप्यूटर पर कोई बेसिक काम जैसे ईमेल चेक करना या टाइपिंग की कोशिश की है?",
+      "answer": "मेहनत करने की आदत है। Time पर आता हूं हमेशा।"
+    },
+    {
+      "question": "यह जानकर अच्छा लगा कि आप समय के पाबंद हैं, यह बहुत जरूरी गुण है। मेरा सवाल यह था कि क्या आपने कभी कंप्यूटर पर फाइल्स सेव करना या टाइपिंग जैसे काम करने की कोशिश की है? अगर नहीं भी की है, तो क्या आप काम के दौरान नई चीजें सीखने के लिए तैयार हैं?",
+      "answer": "Koi bhi kaam seekhne ko ready hoon. Jaldi seekhta hoon main."
+    }
+  ],
+  "score_report": {
+    "overall_score": 35,
+    "scores_per_axis": {
+      "communication": 40,
+      "technical": 15,
+      "problem_solving": 30,
+      "behavioral": 45,
+      "delivery": 40
+    },
+    "gap_vs_bar": {
+      "communication": -20,
+      "technical": -25,
+      "problem_solving": -25,
+      "behavioral": -20,
+      "delivery": -15
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q2 answer",
+      "quote": "मेहनत करने की आदत है। Time पर आता हूं हमेशा।",
+      "why_it_hurt": "सवाल कंप्यूटर स्किल्स के बारे में था, लेकिन आपने उसका जवाब नहीं दिया। इंटरव्यू में जो पूछा गया है, उसी का जवाब देना बहुत ज़रूरी है ताकि मुझे आपकी स्किल्स का पता चल सके।",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "Koi bhi kaam seekhne ko ready hoon. Jaldi seekhta hoon main.",
+      "why_it_helped": "यह एक बहुत अच्छा एटीट्यूड है। एक ऑफिस असिस्टेंट के तौर पर नई चीजें सीखने की इच्छा और जल्दी सीखने की क्षमता सबसे जरूरी है।",
+      "quote_verified": true
+    },
+    "next_action": "अगले 3 दिनों में, अपने फोन पर MS Word या Google Docs का इस्तेमाल करके एक छोटा सा डॉक्यूमेंट बनाने और उसे सेव करने का अभ्यास करें। फिर इसे किसी को ईमेल करने की कोशिश करें।"
+  }
+}

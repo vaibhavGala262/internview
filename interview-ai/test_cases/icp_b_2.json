@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "CX Associate",
+    "round_type": "behavioral",
+    "company_tier": "startup",
+    "language": "hi"
+  },
+  "mock_answers": [
+    "एक बार एक customer बहुत गुस्से में था। उसका order 2 दिन late था। मैंने उसे sorry बोला और manager को call करके refund दिलवाया। वो खुश हो गया।",
+    "मैं हमेशा शांत रहता हूं। गुस्से में कभी जवाब नहीं देता। पहले सुनता हूं फिर बोलता हूं।",
+    "Team के साथ काम करने का experience नहीं है। अकेले delivery करता था।"
+  ]
+}

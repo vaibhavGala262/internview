@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Data Engineer",
+    "round_type": "technical",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "mock_answers": [
+    "I've used Python with pandas for data cleaning. Removed nulls, normalized columns, merged datasets.",
+    "I built a pipeline using pandas and scheduled it with cron. The pipeline processed 500k rows daily.",
+    "I know SQL well. I've written complex joins, window functions, and CTEs for analytics queries."
+  ]
+}

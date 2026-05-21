@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "screening",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "mock_answers": [
+    "I'm a final year CS student. I've built a REST API using FastAPI with Docker. Deployed on AWS EC2.",
+    "For databases I've mostly used PostgreSQL. I designed a schema for a todo app with users and tasks tables, used foreign keys.",
+    "I don't really know much about system design yet. I just build things and see what works."
+  ]
+}

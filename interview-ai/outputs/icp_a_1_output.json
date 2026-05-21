@@ -1,0 +1,73 @@
+{
+  "case": "icp_a_1.json",
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "screening",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "To kick things off, could you walk me through a recent software engineering project you worked on? Please highlight your specific role, the core technologies you chose, and how you ensured code quality and engineering standards were maintained within your team.",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "No previous answers exist as this is the first question of the interview. Generating an opening screening question at difficulty level 2 to assess the candidate's project background, technical decisions, and process awareness suitable for a mid-tier software engineering role."
+    },
+    {
+      "next_question": "Thanks for sharing those technologies. Since you mentioned deploying a FastAPI application using Docker on AWS EC2, could you walk me through the basic steps of how you set up your Dockerfile for this project, and why you chose EC2 for your deployment?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because it was extremely brief, lacked specific details about the project's architecture, and completely ignored the prompt's request to explain how code quality and engineering standards were maintained. Probing same gap at lower difficulty by asking for a basic walkthrough of their Docker and EC2 setup."
+    },
+    {
+      "next_question": "No worries, we can definitely dive into your database schema in a moment. Before we do, since you mentioned using Docker with FastAPI, could you explain in simple terms what a Docker container is and why you decided to containerize your application in the first place?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate completely avoided the previous question about Dockerfile configuration and EC2 deployment, pivoting instead to PostgreSQL. Probing same gap at lower difficulty by asking for a high-level explanation of Docker's purpose."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "To kick things off, could you walk me through a recent software engineering project you worked on? Please highlight your specific role, the core technologies you chose, and how you ensured code quality and engineering standards were maintained within your team.",
+      "answer": "I'm a final year CS student. I've built a REST API using FastAPI with Docker. Deployed on AWS EC2."
+    },
+    {
+      "question": "Thanks for sharing those technologies. Since you mentioned deploying a FastAPI application using Docker on AWS EC2, could you walk me through the basic steps of how you set up your Dockerfile for this project, and why you chose EC2 for your deployment?",
+      "answer": "For databases I've mostly used PostgreSQL. I designed a schema for a todo app with users and tasks tables, used foreign keys."
+    },
+    {
+      "question": "No worries, we can definitely dive into your database schema in a moment. Before we do, since you mentioned using Docker with FastAPI, could you explain in simple terms what a Docker container is and why you decided to containerize your application in the first place?",
+      "answer": "I don't really know much about system design yet. I just build things and see what works."
+    }
+  ],
+  "score_report": {
+    "overall_score": 28,
+    "scores_per_axis": {
+      "communication": 30,
+      "technical": 25,
+      "problem_solving": 20,
+      "behavioral": 30,
+      "delivery": 35
+    },
+    "gap_vs_bar": {
+      "communication": -40,
+      "technical": -40,
+      "problem_solving": -50,
+      "behavioral": -35,
+      "delivery": -25
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "I don't really know much about system design yet. I just build things and see what works.",
+      "why_it_hurt": "This response demonstrates a critical lack of basic technical knowledge regarding tools the candidate claimed to have used. It also displays a trial-and-error mindset that lacks engineering rigor, structure, and foundational understanding of software development lifecycle standards.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "I've built a REST API using FastAPI with Docker. Deployed on AWS EC2.",
+      "why_it_helped": "The candidate briefly identified a highly relevant and modern software stack (FastAPI, Docker, AWS EC2) which is appropriate for a modern web backend role.",
+      "quote_verified": true
+    },
+    "next_action": "Practice explaining the core concept of containerization and Docker (images, containers, Dockerfiles) by drafting a structured, 2-minute technical explanation that connects these tools directly to your REST API project."
+  }
+}

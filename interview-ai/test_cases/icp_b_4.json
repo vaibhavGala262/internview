@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "CX Associate",
+    "round_type": "behavioral",
+    "company_tier": "enterprise",
+    "language": "hi"
+  },
+  "mock_answers": [
+    "Customer support का experience नहीं है लेकिन लोगों से बात करने में comfortable हूं।",
+    "एक बार मेरे area में बहुत orders थे और मैं अकेला था। मैंने priority set की और सबसे पहले time-sensitive orders deliver किए।",
+    "अगर कोई मुझसे रूड बात करे तो मैं शांत रहूंगा और professional तरीके से handle करूंगा। Customer हमेशा सही नहीं होता पर हमें ऐसा ही treat करना है।"
+  ]
+}

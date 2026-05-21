@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "technical",
+    "company_tier": "startup",
+    "language": "en"
+  },
+  "mock_answers": [
+    "I've implemented binary search and sorted arrays. Time complexity is O(log n).",
+    "For the binary search I wrote it recursively first, then iteratively. The iterative version is better for large inputs because it avoids stack overflow.",
+    "I haven't worked with graphs much. I know BFS and DFS exist but haven't implemented them."
+  ]
+}

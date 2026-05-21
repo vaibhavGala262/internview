@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Data Entry Executive",
+    "round_type": "technical",
+    "company_tier": "mid",
+    "language": "hi"
+  },
+  "mock_answers": [
+    "Excel में basic formulas आती हैं — SUM, AVERAGE। Typing speed अभी slow है पर practice कर रहा हूं।",
+    "मैंने एक बार अपने delivery records को Excel में enter किया था — date, amount, customer name। खुद से सीखा था।",
+    "Fast typing नहीं होती अभी। पर मैं रोज़ 30 minutes practice करता हूं। 2 हफ्ते में improve हुआ है।"
+  ]
+}

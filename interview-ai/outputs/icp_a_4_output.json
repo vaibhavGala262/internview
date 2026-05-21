@@ -1,0 +1,73 @@
+{
+  "case": "icp_a_4.json",
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "behavioral",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "Can you share a specific example of a time when you had a disagreement with a teammate regarding a technical implementation detail or architectural choice? How did you present your case, and how did the team ultimately reach a resolution?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "Since this is the first question of the behavioral round for a high-wage software engineering candidate at a mid-tier company, the difficulty is set to 2. The question targets conflict resolution, technical trade-offs, and communication, expecting a STAR-structured response."
+    },
+    {
+      "next_question": "While organizing tasks via GitHub issues and standups is great for project management, let's focus specifically on team alignment. Can you share a simple example where another developer on your backend team wanted to write code or approach a task differently than you did? How did you discuss that difference to decide which path to take?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate completely bypassed the question about resolving a technical disagreement, talking instead about basic project organization (GitHub issues and standups). Probing same gap at lower difficulty by focusing on a simpler, day-to-day coding or task disagreement."
+    },
+    {
+      "next_question": "In a team environment, we often have to navigate differing opinions during code reviews. Can you share a specific time when a teammate gave you feedback on a pull request that you didn't agree with? How did you handle that feedback, and what was the outcome?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate failed to address the core prompt about resolving a disagreement or differing approach, instead describing a mentoring scenario (helping a stuck teammate with JWTs). Probing same gap at lower difficulty by focusing on a common, everyday scenario like code review feedback."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "Can you share a specific example of a time when you had a disagreement with a teammate regarding a technical implementation detail or architectural choice? How did you present your case, and how did the team ultimately reach a resolution?",
+      "answer": "I worked on a group project where I had to lead the backend. I organized the work using GitHub issues and daily standups."
+    },
+    {
+      "question": "While organizing tasks via GitHub issues and standups is great for project management, let's focus specifically on team alignment. Can you share a simple example where another developer on your backend team wanted to write code or approach a task differently than you did? How did you discuss that difference to decide which path to take?",
+      "answer": "When a teammate was stuck on authentication, I pair programmed with them and helped them understand JWT tokens."
+    },
+    {
+      "question": "In a team environment, we often have to navigate differing opinions during code reviews. Can you share a specific time when a teammate gave you feedback on a pull request that you didn't agree with? How did you handle that feedback, and what was the outcome?",
+      "answer": "I don't handle conflict well. I usually just do the work myself instead of arguing."
+    }
+  ],
+  "score_report": {
+    "overall_score": 33,
+    "scores_per_axis": {
+      "communication": 35,
+      "technical": 40,
+      "problem_solving": 30,
+      "behavioral": 20,
+      "delivery": 40
+    },
+    "gap_vs_bar": {
+      "communication": -35,
+      "technical": -25,
+      "problem_solving": -40,
+      "behavioral": -45,
+      "delivery": -20
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "I don't handle conflict well. I usually just do the work myself instead of arguing.",
+      "why_it_hurt": "This statement is a critical red flag for behavioral evaluation. It highlights an inability to collaborate, negotiate, or accept feedback, opting instead for isolation and taking on extra workload, which is unsustainable and toxic in a team environment.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "I pair programmed with them and helped them understand JWT tokens.",
+      "why_it_helped": "This phrase demonstrates an initiative to mentor and assist teammates with technical hurdles, showing a baseline capability for collaborative coding even though the candidate missed the core focus of the prompt.",
+      "quote_verified": true
+    },
+    "next_action": "Practice structuring behavioral answers using the STAR method. Focus on preparing a specific scenario where you had a differing opinion, outlining how you active-listened, objectively weighed the trade-offs of both options, and agreed on a collaborative path forward instead of taking over the tasks."
+  }
+}

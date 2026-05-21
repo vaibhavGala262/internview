@@ -1,0 +1,73 @@
+{
+  "case": "icp_a_3.json",
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Backend Engineer",
+    "round_type": "technical",
+    "company_tier": "enterprise",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "In an enterprise backend system handling millions of requests daily, how would you design a distributed caching strategy to reduce database load? Please walk me through your choice of technologies and how you would handle cache invalidation.",
+      "question_type": "technical",
+      "difficulty_level": 3,
+      "reasoning": "This is the first question of the technical round for a high-wage backend engineering role at an enterprise company. Setting baseline difficulty at 3 to assess system design and architectural knowledge regarding distributed caching and data consistency."
+    },
+    {
+      "next_question": "Let's focus on managing database load within a single microservice. If a specific service is experiencing high read latency on its database, how would you implement a basic cache-aside pattern using a cache like Redis? Please walk me through how a read request and a write/update request would interact with this cache.",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate completely avoided the topic of distributed caching and cache invalidation, pivoting instead to microservices and RabbitMQ. Probing same gap at lower difficulty by focusing on a basic cache-aside pattern and single-service database load mitigation."
+    },
+    {
+      "next_question": "Let's strip away the implementation details for a moment. At a fundamental level, what is the core architectural difference between retrieving data from an in-memory store like Redis versus a traditional relational database? How does this difference directly translate to reduced latency and database load in an enterprise application?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate completely dodged the question regarding Redis and cache-aside patterns to talk about RabbitMQ configuration. Probing same gap at lower difficulty by asking for the fundamental difference between relational database storage and in-memory caching."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "In an enterprise backend system handling millions of requests daily, how would you design a distributed caching strategy to reduce database load? Please walk me through your choice of technologies and how you would handle cache invalidation.",
+      "answer": "I've worked with microservices. Each service owns its own database. We used RabbitMQ for async communication."
+    },
+    {
+      "question": "Let's focus on managing database load within a single microservice. If a specific service is experiencing high read latency on its database, how would you implement a basic cache-aside pattern using a cache like Redis? Please walk me through how a read request and a write/update request would interact with this cache.",
+      "answer": "For the RabbitMQ setup I configured dead letter queues, set up consumer groups, and handled message retry logic with exponential backoff."
+    },
+    {
+      "question": "Let's strip away the implementation details for a moment. At a fundamental level, what is the core architectural difference between retrieving data from an in-memory store like Redis versus a traditional relational database? How does this difference directly translate to reduced latency and database load in an enterprise application?",
+      "answer": "I'm not very confident about distributed transactions. I know about 2PC but I've never implemented it."
+    }
+  ],
+  "score_report": {
+    "overall_score": 13,
+    "scores_per_axis": {
+      "communication": 15,
+      "technical": 10,
+      "problem_solving": 5,
+      "behavioral": 20,
+      "delivery": 15
+    },
+    "gap_vs_bar": {
+      "communication": -55,
+      "technical": -55,
+      "problem_solving": -65,
+      "behavioral": -45,
+      "delivery": -45
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q2 answer",
+      "quote": "For the RabbitMQ setup I configured dead letter queues, set up consumer groups, and handled message retry logic with exponential backoff.",
+      "why_it_hurt": "The candidate completely failed to answer the specific technical question about implementing a cache-aside pattern using Redis, instead choosing to repeat irrelevant details about RabbitMQ configuration. This highlights a critical gap in both technical understanding of caching and active listening.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "configured dead letter queues, set up consumer groups, and handled message retry logic with exponential backoff.",
+      "why_it_helped": "While completely off-topic for a caching question, this specific segment shows that the candidate has at least some hands-on familiarity with asynchronous messaging and reliability patterns in microservices.",
+      "quote_verified": true
+    },
+    "next_action": "Practice structured system design responses. Specifically, record yourself explaining the cache-aside pattern (detailing the read path, write path, and invalidation) in under 2 minutes, ensuring you stay focused on the question asked instead of pivoting to other topics."
+  }
+}

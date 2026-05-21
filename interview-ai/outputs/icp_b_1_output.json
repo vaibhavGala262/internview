@@ -1,0 +1,73 @@
+{
+  "case": "icp_b_1.json",
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Data Entry Executive",
+    "round_type": "screening",
+    "company_tier": "startup",
+    "language": "hi"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "नमस्ते! इस इंटरव्यू में आपका स्वागत है। मुझे अपने बारे में थोड़ा बताइए और ये समझाइए कि आपने पहले कभी डेटा एंट्री का काम किया है? अगर हाँ, तो आप आमतौर पर कौन से सॉफ्टवेयर या टूल्स जैसे Excel या Google Sheets का इस्तेमाल करते हैं?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "This is the first question of the screening round for a Data Entry Executive role. Keeping the language in conversational Hindi, the question aims to put the candidate at ease while assessing their background and basic familiarity with data entry tools."
+    },
+    {
+      "next_question": "मैं आपकी मेहनत की सराहना करता हूँ। delivery के काम में बहुत भाग-दौड़ रहती है, तो क्या आपने कभी अपने मोबाइल या कंप्यूटर पर ग्राहकों के नाम या पते जैसे छोटे-मोटे रिकॉर्ड्स को एक लिस्ट या फाइल में लिखने या सेव करने का काम किया है? या अगर आपको Excel में डेटा भरना हो, तो क्या आपने उसे पहले कभी इस्तेमाल किया है?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate did not address the question about specific tools like Excel or Google Sheets, focusing instead on their background in delivery. Probing the same gap at a lower difficulty to see if they have any foundational experience with data organization."
+    },
+    {
+      "next_question": "बहुत बढ़िया, धीरे-धीरे सीखने से ही काम में पकड़ आती है। अगर मैं आपको एक छोटी सी लिस्ट दूँ जिसमें कुछ ग्राहकों के नाम और उनके मोबाइल नंबर लिखे हों, तो क्या आप उसे Excel या Google Sheets में एक टेबल बनाकर सही तरह से टाइप कर पाएंगे? या फिर आपको उसमें अभी किसी और की मदद की ज़रूरत पड़ेगी?",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because the candidate's experience with Excel is vague and lacks concrete examples of data entry tasks. Probing same gap at a lower difficulty level to assess practical capability for the specific role."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "नमस्ते! इस इंटरव्यू में आपका स्वागत है। मुझे अपने बारे में थोड़ा बताइए और ये समझाइए कि आपने पहले कभी डेटा एंट्री का काम किया है? अगर हाँ, तो आप आमतौर पर कौन से सॉफ्टवेयर या टूल्स जैसे Excel या Google Sheets का इस्तेमाल करते हैं?",
+      "answer": "मैं पिछले 2 साल से delivery का काम कर रहा हूं। रोज़ 10-12 घंटे काम करता हूं। Office job चाहिए क्योंकि family को stability चाहिए।"
+    },
+    {
+      "question": "मैं आपकी मेहनत की सराहना करता हूँ। delivery के काम में बहुत भाग-दौड़ रहती है, तो क्या आपने कभी अपने मोबाइल या कंप्यूटर पर ग्राहकों के नाम या पते जैसे छोटे-मोटे रिकॉर्ड्स को एक लिस्ट या फाइल में लिखने या सेव करने का काम किया है? या अगर आपको Excel में डेटा भरना हो, तो क्या आपने उसे पहले कभी इस्तेमाल किया है?",
+      "answer": "Computer थोड़ा-थोड़ा use करता हूं। Phone पर WhatsApp, Google Maps चलाता हूं। Excel थोड़ा सीखा है।"
+    },
+    {
+      "question": "बहुत बढ़िया, धीरे-धीरे सीखने से ही काम में पकड़ आती है। अगर मैं आपको एक छोटी सी लिस्ट दूँ जिसमें कुछ ग्राहकों के नाम और उनके मोबाइल नंबर लिखे हों, तो क्या आप उसे Excel या Google Sheets में एक टेबल बनाकर सही तरह से टाइप कर पाएंगे? या फिर आपको उसमें अभी किसी और की मदद की ज़रूरत पड़ेगी?",
+      "answer": "मुझे नहीं पता data entry में क्या होता है। बस type करना होता है शायद।"
+    }
+  ],
+  "score_report": {
+    "overall_score": 35,
+    "scores_per_axis": {
+      "communication": 45,
+      "technical": 25,
+      "problem_solving": 30,
+      "behavioral": 40,
+      "delivery": 40
+    },
+    "gap_vs_bar": {
+      "communication": -15,
+      "technical": -15,
+      "problem_solving": -25,
+      "behavioral": -25,
+      "delivery": -15
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "मुझे नहीं पता data entry में क्या होता है। बस type करना होता है शायद।",
+      "why_it_hurt": "यह जवाब दिखाता है कि उम्मीदवार को डेटा एंट्री की मूल जिम्मेदारी की समझ नहीं है, जो इस भूमिका के लिए सबसे जरूरी है।",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "Office job चाहिए क्योंकि family को stability चाहिए।",
+      "why_it_helped": "यह उम्मीदवार की ईमानदारी और काम के प्रति गंभीर इरादे को दर्शाता है, जो सीखने की इच्छा की ओर इशारा करता है।",
+      "quote_verified": true
+    },
+    "next_action": "YouTube पर 'Basic Excel for Beginners' के ट्यूटोरियल देखें और अपने फोन या कंप्यूटर पर 10 दोस्तों के नाम, फोन नंबर और पते की एक Excel शीट बनाकर उसे सेव करना सीखें।"
+  }
+}

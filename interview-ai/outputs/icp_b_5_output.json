@@ -1,0 +1,73 @@
+{
+  "case": "icp_b_5.json",
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Data Entry Executive",
+    "round_type": "technical",
+    "company_tier": "mid",
+    "language": "hi"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "नमस्ते! डेटा एंट्री के काम में अक्सर हमें बहुत सारी जानकारी एक साथ संभालनी पड़ती है। क्या आपने कभी Microsoft Excel या Google Sheets जैसे किसी टूल का इस्तेमाल किया है? अगर हाँ, तो आपने उसमें किस तरह का काम किया है, इसके बारे में थोड़ा बताएं।",
+      "question_type": "technical",
+      "difficulty_level": 2,
+      "reasoning": "This is the opening question for a technical screening round for a Data Entry role. It focuses on assessing fundamental tool proficiency (Excel/Sheets) in a conversational, approachable manner suitable for the low_wage persona."
+    },
+    {
+      "next_question": "बहुत अच्छा, SUM और AVERAGE जैसे फॉर्मूले डेटा एंट्री में काफी काम आते हैं। यह बताइए कि अगर आपको एक बड़ी लिस्ट में कुछ गलतियाँ (जैसे कि कोई खाली सेल या गलत नाम) ढूंढनी हों, तो आप उसे एक्सेल में कैसे चेक करेंगे? क्या आपने कभी डेटा को फ़िल्टर (Filter) करने या उसे सॉर्ट (Sort) करने का इस्तेमाल किया है?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because while the candidate mentioned basic formulas, they admitted to slow typing and lacked detail on data management. Probing same topic at a slightly more practical level to see if they understand data organization beyond just basic math."
+    },
+    {
+      "next_question": "बहुत बढ़िया, खुद से सीखने की आदत बहुत काम आती है! मान लीजिए आपके पास वही डिलीवरी रिकॉर्ड्स की लिस्ट है और आपको केवल उन ऑर्डर्स को देखना है जिनका अमाउंट एक खास राशि (जैसे ₹500) से ज्यादा है, तो आप डेटा में 'Filter' का इस्तेमाल कैसे करेंगे? क्या आप मुझे बता सकते हैं कि एक्सेल में फिल्टर बटन कहाँ होता है और आप उसे कैसे लगाएंगे?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was strong as the candidate confirmed practical experience with delivery records, but it lacked detail on technical usage of tools mentioned. Probing same gap at difficulty 2 to verify if they can actually apply a filter feature in Excel."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "नमस्ते! डेटा एंट्री के काम में अक्सर हमें बहुत सारी जानकारी एक साथ संभालनी पड़ती है। क्या आपने कभी Microsoft Excel या Google Sheets जैसे किसी टूल का इस्तेमाल किया है? अगर हाँ, तो आपने उसमें किस तरह का काम किया है, इसके बारे में थोड़ा बताएं।",
+      "answer": "Excel में basic formulas आती हैं — SUM, AVERAGE। Typing speed अभी slow है पर practice कर रहा हूं।"
+    },
+    {
+      "question": "बहुत अच्छा, SUM और AVERAGE जैसे फॉर्मूले डेटा एंट्री में काफी काम आते हैं। यह बताइए कि अगर आपको एक बड़ी लिस्ट में कुछ गलतियाँ (जैसे कि कोई खाली सेल या गलत नाम) ढूंढनी हों, तो आप उसे एक्सेल में कैसे चेक करेंगे? क्या आपने कभी डेटा को फ़िल्टर (Filter) करने या उसे सॉर्ट (Sort) करने का इस्तेमाल किया है?",
+      "answer": "मैंने एक बार अपने delivery records को Excel में enter किया था — date, amount, customer name। खुद से सीखा था।"
+    },
+    {
+      "question": "बहुत बढ़िया, खुद से सीखने की आदत बहुत काम आती है! मान लीजिए आपके पास वही डिलीवरी रिकॉर्ड्स की लिस्ट है और आपको केवल उन ऑर्डर्स को देखना है जिनका अमाउंट एक खास राशि (जैसे ₹500) से ज्यादा है, तो आप डेटा में 'Filter' का इस्तेमाल कैसे करेंगे? क्या आप मुझे बता सकते हैं कि एक्सेल में फिल्टर बटन कहाँ होता है और आप उसे कैसे लगाएंगे?",
+      "answer": "Fast typing नहीं होती अभी। पर मैं रोज़ 30 minutes practice करता हूं। 2 हफ्ते में improve हुआ है।"
+    }
+  ],
+  "score_report": {
+    "overall_score": 35,
+    "scores_per_axis": {
+      "communication": 40,
+      "technical": 30,
+      "problem_solving": 30,
+      "behavioral": 45,
+      "delivery": 30
+    },
+    "gap_vs_bar": {
+      "communication": -20,
+      "technical": -10,
+      "problem_solving": -25,
+      "behavioral": -20,
+      "delivery": -25
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "Fast typing नहीं होती अभी। पर मैं रोज़ 30 minutes practice करता हूं। 2 हफ्ते में improve हुआ है।",
+      "why_it_hurt": "यह जवाब सवाल से बिल्कुल अलग था। आपसे फिल्टर बटन और उसे इस्तेमाल करने का तरीका पूछा गया था, लेकिन आपने टाइपिंग स्पीड के बारे में बात की, जिससे पता चलता है कि आपको सवाल समझ नहीं आया या टूल की जानकारी कम है।",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "Excel में basic formulas आती हैं — SUM, AVERAGE।",
+      "why_it_helped": "यह आपके तकनीकी ज्ञान की एक स्पष्ट शुरुआत थी। बुनियादी फॉर्मूलों का नाम लेकर आपने यह दिखाया कि आप कम से कम बेसिक टूल से परिचित हैं।",
+      "quote_verified": true
+    },
+    "next_action": "अगले हफ्ते के लिए: YouTube पर 'Excel Filter function tutorial' का 5 मिनट का वीडियो देखें और खुद एक एक्सेल शीट में 10 एंट्रीज डालकर 'Filter' का इस्तेमाल करके ₹500 से ज्यादा वाले अमाउंट को अलग करना सीखें।"
+  }
+}

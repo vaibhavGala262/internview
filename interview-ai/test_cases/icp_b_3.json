@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "Office Assistant",
+    "round_type": "screening",
+    "company_tier": "mid",
+    "language": "hi"
+  },
+  "mock_answers": [
+    "मैं पढ़ा-लिखा हूं, 12th pass हूं। Computer सीखना चाहता हूं।",
+    "मेहनत करने की आदत है। Time पर आता हूं हमेशा।",
+    "Koi bhi kaam seekhne ko ready hoon. Jaldi seekhta hoon main."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "case": "icp_b_2.json",
+  "profile": {
+    "icp_type": "low_wage",
+    "target_role": "CX Associate",
+    "round_type": "behavioral",
+    "company_tier": "startup",
+    "language": "hi"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "नमस्ते! हमारे स्टार्टअप में काम करते समय कभी-कभी बहुत सारी चीज़ें एक साथ आ जाती हैं। क्या आप मुझे बता सकते हैं कि जब आपके पास एक साथ कई काम (tasks) आ जाएं, तो आप यह कैसे तय करते हैं कि पहले क्या करना है और बाद में क्या?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "This is the first interaction. Since this is for a low-wage CX associate role in a startup, I am starting with a foundational behavioral question about prioritization and time management, which is critical in a fast-paced startup environment."
+    },
+    {
+      "next_question": "आपने बहुत अच्छे से बताया कि आपने ग्राहक की समस्या को कैसे हल किया, यह सुनकर अच्छा लगा। पर मान लीजिए, एक तरफ वह गुस्से वाला ग्राहक कॉल पर है और दूसरी तरफ आपके मैनेजर ने आपको तुरंत कोई ज़रूरी डेटा एंट्री का काम दे दिया है। ऐसी स्थिति में, आप इन दोनों कामों को कैसे मैनेज करेंगे?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate ignored the core of the previous question about 'prioritization' and instead gave a story about 'problem-solving/escalation'. Probing the same topic of task prioritization again with a specific conflict scenario to see if they understand how to balance customer needs with internal tasks."
+    },
+    {
+      "next_question": "आपकी बात सही है कि शांत रहना बहुत ज़रूरी है। लेकिन मान लीजिए ग्राहक फोन पर चिल्ला रहा है और आपको उसी समय डेटा एंट्री का काम भी पूरा करना है। आप ग्राहक को क्या बोलेंगे ताकि उन्हें लगे कि आप उनकी मदद कर रहे हैं, और साथ ही आप अपना काम भी सही से कर सकें?",
+      "question_type": "follow_up",
+      "difficulty_level": 2,
+      "reasoning": "Answer was weak because the candidate spoke about their general temperament ('staying calm') but did not address the specific conflict of managing two tasks simultaneously. Probing the same gap at a lower difficulty to get a concrete response on task prioritization and communication."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "नमस्ते! हमारे स्टार्टअप में काम करते समय कभी-कभी बहुत सारी चीज़ें एक साथ आ जाती हैं। क्या आप मुझे बता सकते हैं कि जब आपके पास एक साथ कई काम (tasks) आ जाएं, तो आप यह कैसे तय करते हैं कि पहले क्या करना है और बाद में क्या?",
+      "answer": "एक बार एक customer बहुत गुस्से में था। उसका order 2 दिन late था। मैंने उसे sorry बोला और manager को call करके refund दिलवाया। वो खुश हो गया।"
+    },
+    {
+      "question": "आपने बहुत अच्छे से बताया कि आपने ग्राहक की समस्या को कैसे हल किया, यह सुनकर अच्छा लगा। पर मान लीजिए, एक तरफ वह गुस्से वाला ग्राहक कॉल पर है और दूसरी तरफ आपके मैनेजर ने आपको तुरंत कोई ज़रूरी डेटा एंट्री का काम दे दिया है। ऐसी स्थिति में, आप इन दोनों कामों को कैसे मैनेज करेंगे?",
+      "answer": "मैं हमेशा शांत रहता हूं। गुस्से में कभी जवाब नहीं देता। पहले सुनता हूं फिर बोलता हूं।"
+    },
+    {
+      "question": "आपकी बात सही है कि शांत रहना बहुत ज़रूरी है। लेकिन मान लीजिए ग्राहक फोन पर चिल्ला रहा है और आपको उसी समय डेटा एंट्री का काम भी पूरा करना है। आप ग्राहक को क्या बोलेंगे ताकि उन्हें लगे कि आप उनकी मदद कर रहे हैं, और साथ ही आप अपना काम भी सही से कर सकें?",
+      "answer": "Team के साथ काम करने का experience नहीं है। अकेले delivery करता था।"
+    }
+  ],
+  "score_report": {
+    "overall_score": 35,
+    "scores_per_axis": {
+      "communication": 40,
+      "technical": 30,
+      "problem_solving": 20,
+      "behavioral": 45,
+      "delivery": 40
+    },
+    "gap_vs_bar": {
+      "communication": -20,
+      "technical": -10,
+      "problem_solving": -35,
+      "behavioral": -20,
+      "delivery": -15
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "Team के साथ काम करने का experience नहीं है। अकेले delivery करता था।",
+      "why_it_hurt": "यह जवाब सवाल से पूरी तरह अलग है। मैनेजर ने आपसे पूछा था कि ग्राहक को क्या बोलना है, लेकिन आपने अपनी पिछली नौकरी के बारे में बताना शुरू कर दिया, जिससे पता चलता है कि आपने सवाल को ठीक से समझा नहीं।",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "मैं हमेशा शांत रहता हूं। गुस्से में कभी जवाब नहीं देता। पहले सुनता हूं फिर बोलता हूं।",
+      "why_it_helped": "यह ग्राहक सेवा (Customer Service) के लिए एक बहुत ही महत्वपूर्ण गुण है। आपने दबाव में संयम रखने की अपनी क्षमता को सही तरीके से दर्शाया है।",
+      "quote_verified": true
+    },
+    "next_action": "अगले मॉक इंटरव्यू में 'STAR' (Situation, Task, Action, Result) तकनीक का उपयोग करने का अभ्यास करें। खास तौर पर, ग्राहकों को संभालने के लिए पहले से कुछ स्क्रिप्ट तैयार करें कि अगर आपको उन्हें होल्ड पर रखना हो या थोड़ा इंतज़ार करने को कहना हो, तो आप शालीनता से कैसे कहेंगे।"
+  }
+}
