@@ -70,3 +70,21 @@ Outputs are saved to `interview-ai/outputs/`.
 
 Set `MODEL_PROVIDER=gemini` for Gemini API support.
 Set `MODEL_PROVIDER=anthropic` for `claude-sonnet-4-20250514` via Anthropic API.
+
+## Voice Interview Mode
+
+Install voice dependencies:
+  pip install pyttsx3 SpeechRecognition pyaudio
+
+Run voice interview:
+  py voice_interview.py
+
+1. Select profile: 1 for SWE (English) or 2 for CX Associate (Hindi)
+2. Listen to the question spoken aloud
+3. Speak your answer into the microphone
+4. Repeat for 3 turns
+5. Receive spoken + printed score report
+
+Note for Windows: if pyaudio install fails, run:
+  pip install pipwin
+  pipwin install pyaudio
