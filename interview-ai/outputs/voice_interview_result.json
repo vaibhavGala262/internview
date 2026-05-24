@@ -1,0 +1,72 @@
+{
+  "profile": {
+    "icp_type": "high_wage",
+    "target_role": "Software Engineer",
+    "round_type": "screening",
+    "company_tier": "mid",
+    "language": "en"
+  },
+  "conductor_outputs": [
+    {
+      "next_question": "Could you start by telling me a bit about your background and what specifically drew you to a career in software engineering?",
+      "question_type": "behavioral",
+      "difficulty_level": 2,
+      "reasoning": "No previous answers. Generating an opening question appropriate for a screening round for a Software Engineer role, focusing on background and motivation."
+    },
+    {
+      "next_question": "You mentioned you like to 'build applications' and are interested in 'backend design'. Could you tell me more about what specifically excites you about these areas? Perhaps share an early experience or project that sparked this interest.",
+      "question_type": "follow_up",
+      "difficulty_level": 1,
+      "reasoning": "Answer was weak because it was vague, lacked specific examples, and didn't clearly articulate the core motivation or 'what specifically drew them' to software engineering, despite listing interests like 'backend design' and 'building programs'. Probing the same gap at a lower difficulty to elicit more concrete reasons and experiences."
+    },
+    {
+      "next_question": "You mentioned using Kafka and Zookeeper for asynchronous processing and Prometheus/Grafana for observability in your project. Can you elaborate on a specific challenge you faced while implementing asynchronous processing with Kafka, and how you addressed it, particularly concerning message delivery guarantees or data consistency?",
+      "question_type": "technical",
+      "difficulty_level": 3,
+      "reasoning": "Answer was strong — candidate mentioned specific technologies like Kafka, Zookeeper, Prometheus, and Grafana, along with concepts like asynchronous processing and observability. Escalating to test depth on their practical experience with Kafka, focusing on challenges and guarantees within asynchronous processing."
+    }
+  ],
+  "transcript": [
+    {
+      "question": "Could you start by telling me a bit about your background and what specifically drew you to a career in software engineering?",
+      "answer": "so my name is Vaibhav Kala I am from 3rd year Computer Science computer science and electrical field ecosystems and backend design so what drives in computer engineering for Digital systems and building programs so yeah I like to build application"
+    },
+    {
+      "question": "You mentioned you like to 'build applications' and are interested in 'backend design'. Could you tell me more about what specifically excites you about these areas? Perhaps share an early experience or project that sparked this interest.",
+      "answer": "so talking about vacant design I feel like back and design I build project names actually this oscillations Y actually use kafka and to keep for asynchronous processing using the project apart from that I use graph and promoters for observability in that particular product"
+    },
+    {
+      "question": "You mentioned using Kafka and Zookeeper for asynchronous processing and Prometheus/Grafana for observability in your project. Can you elaborate on a specific challenge you faced while implementing asynchronous processing with Kafka, and how you addressed it, particularly concerning message delivery guarantees or data consistency?",
+      "answer": "so technically speaking like the other was several of the choose or that he faced some of those was like configuration that a lot of configuration including cough can you give a apart from them like when we do asynchronous data ingestion of what actually happens is like you can match drop into like that was one of the challenge like we did not new at the starting of that actually help apart from that for data consistency and several data consistency"
+    }
+  ],
+  "score_report": {
+    "overall_score": 23,
+    "scores_per_axis": {
+      "communication": 20,
+      "technical": 40,
+      "problem_solving": 25,
+      "behavioral": 15,
+      "delivery": 15
+    },
+    "gap_vs_bar": {
+      "communication": -50,
+      "technical": -25,
+      "problem_solving": -45,
+      "behavioral": -50,
+      "delivery": -45
+    },
+    "weak_moment": {
+      "timestamp_approx": "Q3 answer",
+      "quote": "so technically speaking like the other was several of the choose or that he faced some of those was like configuration that a lot of configuration including cough can you give a apart from them like when we do asynchronous data ingestion of what actually happens is like you can match drop into like that was one of the challenge like we did not new at the starting of that actually help apart from that for data consistency and several data consistency",
+      "why_it_hurt": "This quote exemplifies a critical lack of clarity, structure, and conciseness. The answer is highly fragmented, contains excessive filler words ('like', 'so'), and fails to clearly articulate specific challenges or solutions related to Kafka, message delivery, or data consistency, making it impossible to assess the candidate's understanding or problem-solving approach.",
+      "quote_verified": true
+    },
+    "strong_moment": {
+      "quote": "I use kafka and to keep for asynchronous processing using the project apart from that I use graph and promoters for observability in that particular product",
+      "why_it_helped": "This statement is the strongest part of the interview, as it specifically names relevant technologies (Kafka, Zookeeper, Grafana, Prometheus) and correctly associates them with their typical use cases (asynchronous processing, observability). This demonstrates foundational exposure to important concepts and tools in backend engineering.",
+      "quote_verified": false
+    },
+    "next_action": "Practice explaining complex technical concepts and project details in a clear, concise, and structured manner. Focus on articulating challenges, actions taken, and the results achieved, using the STAR method, without excessive filler words."
+  }
+}

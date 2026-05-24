@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Interview Platform</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f1a;
+      --surface: #1a1a2e;
+      --surface2: #252540;
+      --primary: #6c63ff;
+      --primary-hover: #5a52e0;
+      --accent: #00d4aa;
+      --danger: #ff4757;
+      --warning: #ffa502;
+      --text: #e8e8f0;
+      --text-muted: #8888a0;
+      --border: #2a2a45;
+      --radius: 12px;
+    }
+    html, body { height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    .screen { display: none; height: 100%; }
+    .screen.active { display: flex; }
+    .container { max-width: 680px; width: 100%; margin: auto; padding: 40px 24px; }
+    .container.center { text-align: center; justify-content: center; flex-direction: column; display: flex; }
+
+    h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+    h2 { font-size: 1.5rem; margin-bottom: 16px; color: var(--text); }
+    p { color: var(--text-muted); margin-bottom: 24px; }
+
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group select {
+      width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: var(--radius);
+      background: var(--surface2); color: var(--text); font-size: 0.95rem; outline: none;
+      transition: border 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: var(--primary); }
+    .form-group select { cursor: pointer; appearance: auto; }
+
+    .btn-primary, .btn-record, .btn-stop {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 14px 32px; border: none; border-radius: var(--radius); font-size: 1rem;
+      font-weight: 600; cursor: pointer; transition: all 0.2s; width: 100%;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    .btn-record { background: var(--accent); color: #0f0f1a; }
+    .btn-record:hover { background: #00bf9a; transform: translateY(-1px); }
+    .btn-record.recording { background: var(--danger); animation: pulse 1s infinite; }
+    .btn-stop { background: var(--danger); color: #fff; }
+
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+    .interview-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; height: 100%; padding: 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
+    .video-section { display: flex; flex-direction: column; gap: 12px; }
+    .video-section video { width: 100%; border-radius: var(--radius); background: #000; aspect-ratio: 4/3; object-fit: cover; border: 2px solid var(--border); }
+    .qa-section { display: flex; flex-direction: column; gap: 16px; }
+
+    .cheating-status { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-muted); }
+    .cheating-status span { background: var(--surface2); padding: 6px 12px; border-radius: 8px; }
+    .cheating-status .ok { color: var(--accent); }
+    .cheating-status .warn { color: var(--warning); }
+    .cheating-status .danger { color: var(--danger); }
+
+    .alert-log { max-height: 120px; overflow-y: auto; font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 2px; }
+    .alert-log .alert-item { padding: 4px 8px; border-radius: 4px; background: var(--surface2); }
+    .alert-log .alert-item.critical { border-left: 3px solid var(--danger); color: var(--danger); }
+    .alert-log .alert-item.high { border-left: 3px solid var(--danger); color: var(--warning); }
+    .alert-log .alert-item.medium { border-left: 3px solid var(--warning); color: var(--warning); }
+
+    .turn-indicator { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    .question-box { background: var(--surface); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+    .question-box p { font-size: 1.05rem; color: var(--text); margin-bottom: 8px; line-height: 1.5; }
+    .question-box small { color: var(--text-muted); font-size: 0.8rem; }
+
+    .recording-controls { display: flex; gap: 12px; align-items: center; }
+    .recording-controls button { flex: 1; }
+    .recording-timer { color: var(--danger); font-size: 0.9rem; font-weight: 600; animation: pulse 1s infinite; }
+
+    .transcript-box { background: var(--surface2); padding: 16px; border-radius: var(--radius); font-size: 0.9rem; }
+    .transcript-box strong { color: var(--accent); }
+    .transcript-box p { color: var(--text); margin: 4px 0 0; }
+
+    .progress-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); transition: width 0.5s; border-radius: 2px; }
+
+    .spinner { width: 48px; height: 48px; border: 4px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 24px auto; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .score-overview { text-align: center; margin: 24px 0; }
+    .score-number { font-size: 4rem; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: block; }
+    .score-label { font-size: 1rem; color: var(--text-muted); }
+
+    .axis-scores { display: grid; gap: 12px; margin: 24px 0; }
+    .axis-row { display: flex; align-items: center; gap: 12px; }
+    .axis-name { width: 140px; font-size: 0.85rem; text-transform: capitalize; }
+    .axis-bar-bg { flex: 1; height: 24px; background: var(--surface2); border-radius: 12px; overflow: hidden; position: relative; }
+    .axis-bar-fill { height: 100%; border-radius: 12px; transition: width 1s; }
+    .axis-bar-fill.good { background: var(--accent); }
+    .axis-bar-fill.ok { background: var(--warning); }
+    .axis-bar-fill.bad { background: var(--danger); }
+    .axis-score-text { width: 60px; text-align: right; font-size: 0.85rem; font-weight: 600; }
+    .axis-gap { width: 80px; text-align: right; font-size: 0.8rem; color: var(--text-muted); }
+
+    .moments { display: grid; gap: 16px; margin: 24px 0; }
+    .moment-card { padding: 16px; border-radius: var(--radius); }
+    .moment-card.strong { background: rgba(0, 212, 170, 0.1); border: 1px solid var(--accent); }
+    .moment-card.weak { background: rgba(255, 71, 87, 0.1); border: 1px solid var(--danger); }
+    .moment-card h3 { font-size: 0.9rem; margin-bottom: 8px; }
+    .moment-card.strong h3 { color: var(--accent); }
+    .moment-card.weak h3 { color: var(--danger); }
+    .moment-card .quote { font-style: italic; color: var(--text); margin-bottom: 8px; font-size: 0.9rem; }
+    .moment-card .why { font-size: 0.85rem; color: var(--text-muted); }
+    .next-action { background: var(--surface); padding: 16px; border-radius: var(--radius); border: 1px solid var(--border); margin: 16px 0; }
+    .next-action h3 { font-size: 0.9rem; color: var(--primary); margin-bottom: 8px; }
+    .next-action p { font-size: 0.9rem; margin: 0; }
+
+    .integrity-report { background: var(--surface2); padding: 16px; border-radius: var(--radius); margin: 16px 0; }
+    .integrity-report h3 { font-size: 0.9rem; margin-bottom: 12px; }
+    .integrity-report .row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.85rem; border-bottom: 1px solid var(--border); }
+    .integrity-report .row:last-child { border: none; }
+    .integrity-report .risk-low { color: var(--accent); }
+    .integrity-report .risk-medium { color: var(--warning); }
+    .integrity-report .risk-high { color: var(--danger); }
+    .integrity-report .risk-critical { color: var(--danger); font-weight: 700; }
+
+    .error-msg { background: rgba(255, 71, 87, 0.1); border: 1px solid var(--danger); color: var(--danger); padding: 12px; border-radius: var(--radius); margin: 12px 0; font-size: 0.85rem; }
+
+    @media (max-width: 800px) {
+      .interview-layout { grid-template-columns: 1fr; padding: 12px; }
+      .container { padding: 24px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- SCREEN: Setup -->
+<div id="screen-setup" class="screen active">
+  <div class="container">
+    <h1>AI Mock Interview</h1>
+    <p>Configure your interview session and start practicing.</p>
+    <form id="setup-form">
+      <div class="form-group">
+        <label>Category</label>
+        <select name="category" id="category-select">
+          <option value="technical">Technical</option>
+          <option value="cx">CX / Non-Technical</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select name="role_key" id="role-select"></select>
+      </div>
+      <input type="hidden" name="icp_type" id="icp-type-input" value="high_wage">
+      <div class="form-group">
+        <label>Round Type</label>
+        <select name="round_type">
+          <option value="screening">Screening</option>
+          <option value="technical">Technical</option>
+          <option value="behavioral">Behavioral</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Company Tier</label>
+        <select name="company_tier">
+          <option value="startup">Startup</option>
+          <option value="mid" selected>Mid</option>
+          <option value="enterprise">Enterprise</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Language</label>
+        <select name="language">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Number of Questions</label>
+        <select name="max_turns">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3" selected>3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button type="button" class="btn-primary" id="start-btn">Start Interview</button>
+    </form>
+    <div id="setup-error" class="error-msg" style="display:none"></div>
+  </div>
+</div>
+
+<!-- SCREEN: Interview -->
+<div id="screen-interview" class="screen">
+  <div class="interview-layout">
+    <div class="video-section">
+      <video id="webcam-video" autoplay playsinline muted></video>
+      <div class="cheating-status" id="cheating-status">
+        <span>Face: <span id="face-status" class="ok">—</span></span>
+        <span>Gaze: <span id="gaze-status">—</span></span>
+        <span>Integrity: <span id="integrity-score">100</span>%</span>
+      </div>
+      <div class="alert-log" id="alert-log"></div>
+    </div>
+    <div class="qa-section">
+      <div class="turn-indicator">Turn <span id="turn-number">1</span> of <span id="total-turns">3</span></div>
+      <div class="question-box" id="question-box">
+        <p id="question-text">Initializing interview...</p>
+        <small id="question-meta"></small>
+      </div>
+      <div class="recording-controls">
+        <button id="record-btn" class="btn-record">Start Recording</button>
+        <button id="stop-btn" class="btn-stop" style="display:none">Stop Recording</button>
+      </div>
+      <div class="recording-timer" id="recording-timer" style="display:none">Recording... <span id="timer-seconds">0</span>s</div>
+      <div class="transcript-box" id="transcript-box" style="display:none">
+        <strong>Your answer:</strong>
+        <p id="transcript-text"></p>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div id="interview-error" class="error-msg" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: Scoring -->
+<div id="screen-scoring" class="screen">
+  <div class="container center">
+    <h2>Analyzing Your Interview</h2>
+    <div class="spinner"></div>
+    <p>Please wait while we score your responses...</p>
+  </div>
+</div>
+
+<!-- SCREEN: Results -->
+<div id="screen-results" class="screen">
+  <div class="container">
+    <h1>Interview Results</h1>
+    <div class="score-overview">
+      <span class="score-number" id="overall-score">—</span>
+      <span class="score-label">Overall Score</span>
+    </div>
+    <div class="axis-scores" id="axis-scores"></div>
+    <div class="moments">
+      <div class="moment-card strong" id="strong-moment"></div>
+      <div class="moment-card weak" id="weak-moment"></div>
+    </div>
+    <div class="next-action" id="next-action"></div>
+    <div class="integrity-report" id="integrity-report"></div>
+    <button onclick="resetUI()" class="btn-primary" style="margin-top:16px">Start New Interview</button>
+  </div>
+</div>
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────────────────
+let state = {
+  sessionId: null,
+  profile: null,
+  mediaStream: null,
+  ws: null,
+  analysisInterval: null,
+  audioContext: null,
+  audioSource: null,
+  audioProcessor: null,
+  audioChunks: [],
+  isRecording: false,
+};
+
+const BASE = window.location.port === '8000' || window.location.port === '8001'
+  ? window.location.origin
+  : 'http://localhost:8000';
+
+async function handleResponse(res) {
+  const text = await res.text();
+  let data = {};
+  try { data = JSON.parse(text); } catch (e) {}
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status}: ${text || res.statusText}`);
+  }
+  return data;
+}
+
+// ── SCREEN MANAGEMENT ──────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  if (msg) { el.textContent = msg; el.style.display = 'block'; }
+  else { el.style.display = 'none'; }
+}
+
+function resetUI() {
+  if (state.mediaStream) {
+    state.mediaStream.getTracks().forEach(t => t.stop());
+  }
+  if (state.ws) {
+    state.ws.close();
+  }
+  if (state.analysisInterval) {
+    clearInterval(state.analysisInterval);
+  }
+  if (state.audioContext && state.audioContext.state !== 'closed') {
+    state.audioContext.close();
+  }
+  if (_analyzerCtx && _analyzerCtx.state !== 'closed') {
+    _analyzerCtx.close();
+    _analyzerCtx = null;
+  }
+  state = {
+    sessionId: null, profile: null, mediaStream: null,
+    ws: null, analysisInterval: null, audioContext: null,
+    audioSource: null, audioProcessor: null, audioChunks: [],
+    isRecording: false,
+  };
+  document.getElementById('setup-form').reset();
+  document.getElementById('alert-log').innerHTML = '';
+  document.getElementById('transcript-box').style.display = 'none';
+  document.getElementById('question-text').textContent = 'Initializing interview...';
+  showScreen('screen-setup');
+}
+
+// ── WAV ENCODER ────────────────────────────────────────────────────────────
+function encodeWAV(samples, sampleRate) {
+  const numChannels = 1;
+  const bitsPerSample = 16;
+  const byteRate = sampleRate * numChannels * bitsPerSample / 8;
+  const blockAlign = numChannels * bitsPerSample / 8;
+  const dataSize = samples.length * blockAlign;
+  const bufferSize = 44 + dataSize;
+  const buffer = new ArrayBuffer(bufferSize);
+  const view = new DataView(buffer);
+
+  const write = (offset, str) => {
+    for (let i = 0; i < str.length; i++) view.setUint8(offset + i, str.charCodeAt(i));
+  };
+
+  write(0, 'RIFF');
+  view.setUint32(4, bufferSize - 8, true);
+  write(8, 'WAVE');
+  write(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, numChannels, true);
+  view.setUint32(24, sampleRate, true);
+  view.setUint32(28, byteRate, true);
+  view.setUint16(32, blockAlign, true);
+  view.setUint16(34, bitsPerSample, true);
+  write(36, 'data');
+  view.setUint32(40, dataSize, true);
+
+  let offset = 44;
+  for (let i = 0; i < samples.length; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    offset += 2;
+  }
+  return new Blob([buffer], { type: 'audio/wav' });
+}
+
+// ── WEBCAM ─────────────────────────────────────────────────────────────────
+async function startWebcam() {
+  state.mediaStream = await navigator.mediaDevices.getUserMedia({
+    video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
+    audio: true,
+  });
+  const video = document.getElementById('webcam-video');
+  video.srcObject = state.mediaStream;
+  await video.play();
+  await new Promise(resolve => {
+    if (video.readyState >= 2) resolve();
+    else video.oncanplay = resolve;
+  });
+  // Set up audio analyzer for ambient noise monitoring
+  setupAudioAnalyzer();
+}
+
+// ── TAB SWITCH DETECTION ─────────────────────────────────────────────────
+let tabSwitchCount = 0;
+let tabAwayMs = 0;
+let tabAwayStart = 0;
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) { tabSwitchCount++; tabAwayStart = Date.now(); }
+  else if (tabAwayStart) { tabAwayMs += Date.now() - tabAwayStart; tabAwayStart = 0; }
+});
+window.addEventListener('blur', () => {
+  if (document.visibilityState !== 'hidden') { tabSwitchCount++; tabAwayStart = Date.now(); }
+});
+
+// ── MEDIAPIPE FACE LANDMARKER ─────────────────────────────────────────────
+let faceLandmarker = null;
+let mpVisionReady = false;
+
+const MEDIAPIPE_CDNS = [
+  'https://unpkg.com/@mediapipe/tasks-vision@0.10.18/vision_bundle.mjs',
+  'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/+esm',
+];
+
+async function initMediaPipe() {
+  for (const url of MEDIAPIPE_CDNS) {
+    try {
+      const mod = await import(url);
+      if (!mod.FilesetResolver || !mod.FaceLandmarker) continue;
+      const vision = await mod.FilesetResolver.forVisionTasks(
+        'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.18/wasm'
+      );
+      faceLandmarker = await mod.FaceLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task',
+          delegate: 'CPU',
+        },
+        runningMode: 'VIDEO',
+        numFaces: 2,
+        outputFaceBlendshapes: false,
+        outputFacialTransformationMatrixes: false,
+      });
+      mpVisionReady = true;
+      console.log('MediaPipe initialized from:', url);
+      return;
+    } catch (e) {
+      console.warn('MediaPipe CDN failed:', url, e);
+    }
+  }
+  console.warn('All MediaPipe CDNs failed — face detection unavailable');
+}
+
+// ── GAZE ESTIMATION VIA IRIS LANDMARKS ────────────────────────────────────
+function estimateGaze(landmarks) {
+  // Iris landmarks: left iris center=468, right iris center=473
+  // Eye corners: left eye inner=133, left eye outer=33, right eye inner=362, right eye outer=263
+  try {
+    const lIC = landmarks[468]; const rIC = landmarks[473];
+    const lEI = landmarks[133]; const lEO = landmarks[33];
+    const rEI = landmarks[362]; const rEO = landmarks[263];
+
+    // Gaze ratio per eye: iris position between inner and outer corners
+    const lGaze = (lIC.x - lEO.x) / (lEI.x - lEO.x);
+    const rGaze = (rIC.x - rEO.x) / (rEI.x - rEO.x);
+    const avgGaze = (lGaze + rGaze) / 2;
+
+    // Head rotation from face transformation matrix
+    // Use nose-to-ears ratio for yaw estimate
+    const nose = landmarks[1];
+    const lEar = landmarks[234];
+    const rEar = landmarks[454];
+    const faceW = rEar.x - lEar.x;
+    const noseOffset = faceW > 0 ? (nose.x - lEar.x) / faceW : 0.5;
+
+    let direction = 'center';
+    if (avgGaze < 0.35) direction = 'looking_left';
+    else if (avgGaze > 0.65) direction = 'looking_right';
+
+    // If head is also turned, it's more suspicious
+    if (noseOffset < 0.3 || noseOffset > 0.7) {
+      if (direction === 'center') direction = 'head_turned';
+    }
+
+    return direction;
+  } catch (e) { return 'unknown'; }
+}
+
+// ── BACKGROUND MOTION DETECTION ──────────────────────────────────────────
+const motionCanvas = document.createElement('canvas');
+motionCanvas.width = 160; motionCanvas.height = 120;
+const motionCtx = motionCanvas.getContext('2d', { willReadFrequently: true });
+let prevMotionFrame = null;
+
+function detectMotion(videoEl) {
+  if (!videoEl || videoEl.readyState < 2) return false;
+  motionCtx.drawImage(videoEl, 0, 0, 160, 120);
+  const data = motionCtx.getImageData(0, 0, 160, 120).data;
+  if (!prevMotionFrame) { prevMotionFrame = new Uint8Array(data); return false; }
+  let diff = 0;
+  for (let i = 0; i < data.length; i += 8) {
+    diff += Math.abs(data[i] - prevMotionFrame[i]);
+  }
+  diff /= (data.length / 8);
+  prevMotionFrame = new Uint8Array(data);
+  // diff > 20 means significant motion beyond normal head movement
+  return diff > 20;
+}
+
+// ── AUDIO ANALYZER ────────────────────────────────────────────────────────
+let audioAnalyzerNode = null;
+let audioAnalyzerData = null;
+let highAudioFrames = 0;
+let _analyzerCtx = null;
+
+function setupAudioAnalyzer() {
+  try {
+    _analyzerCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = _analyzerCtx.createMediaStreamSource(state.mediaStream);
+    const an = _analyzerCtx.createAnalyser();
+    an.fftSize = 256;
+    src.connect(an);
+    audioAnalyzerNode = an;
+    audioAnalyzerData = new Uint8Array(an.frequencyBinCount);
+  } catch (e) {}
+}
+
+function checkUnusualAudio() {
+  if (!audioAnalyzerNode || !audioAnalyzerData) return false;
+  audioAnalyzerNode.getByteFrequencyData(audioAnalyzerData);
+  const avg = audioAnalyzerData.reduce((a, b) => a + b, 0) / audioAnalyzerData.length;
+  // Sustained high ambient audio when user likely isn't speaking = possible other voice
+  if (avg > 30) highAudioFrames++;
+  else highAudioFrames = Math.max(0, highAudioFrames - 1);
+  return highAudioFrames > 30;
+}
+
+// ── WEBSOCKET ──────────────────────────────────────────────────────────────
+function connectWebSocket(sessionId) {
+  const wsProto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsUrl = `${wsProto}//${window.location.host}/ws/${sessionId}`;
+  state.ws = new WebSocket(wsUrl);
+
+  state.ws.onopen = () => { startAnalysisLoop(); };
+
+  state.ws.onmessage = (event) => {
+    try { updateCheatingUI(JSON.parse(event.data)); } catch (e) {}
+  };
+
+  state.ws.onerror = () => { console.warn('Cheating detection WebSocket error'); };
+
+  state.ws.onclose = () => {
+    if (state.analysisInterval) { clearInterval(state.analysisInterval); state.analysisInterval = null; }
+  };
+}
+
+// ── PHONE / OBJECT NEAR FACE DETECTION ────────────────────────────────────
+const _phoneCanvas = document.createElement('canvas');
+
+function detectPhoneNearFace(video, landmarks) {
+  if (!landmarks || landmarks.length < 200 || !video || video.readyState < 2) return false;
+  const vw = video.videoWidth || 640;
+  const vh = video.videoHeight || 480;
+
+  // Face bounding box from landmarks
+  let minX = 1, minY = 1, maxX = 0, maxY = 0;
+  for (const lm of landmarks) {
+    if (lm.x < minX) minX = lm.x;
+    if (lm.y < minY) minY = lm.y;
+    if (lm.x > maxX) maxX = lm.x;
+    if (lm.y > maxY) maxY = lm.y;
+  }
+
+  // Region below the face (where a phone would be held)
+  const roiX = Math.max(0, Math.floor(minX * vw - vw * 0.03));
+  const roiY = Math.min(vh - 15, Math.floor(maxY * vh));
+  const roiW = Math.min(vw - roiX, Math.ceil((maxX - minX) * vw + vw * 0.06));
+  const roiH = Math.min(vh - roiY, Math.ceil(vh * 0.18));
+  if (roiW < 30 || roiH < 15) return false;
+
+  _phoneCanvas.width = vw; _phoneCanvas.height = vh;
+  const ctx = _phoneCanvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, vw, vh);
+  const imgData = ctx.getImageData(roiX, roiY, roiW, roiH);
+  const d = imgData.data;
+  const pixelCount = (roiW * roiH);
+  if (pixelCount < 50) return false;
+
+  // Grayscale mean + stddev in the region below the face
+  let sum = 0, sumsq = 0;
+  for (let i = 0; i < d.length; i += 4) {
+    const gray = (d[i] + d[i + 1] + d[i + 2]) / 3;
+    sum += gray;
+    sumsq += gray * gray;
+  }
+  const mean = sum / pixelCount;
+  const variance = (sumsq / pixelCount) - (mean * mean);
+  const stddev = Math.sqrt(Math.max(0, variance));
+
+  // High stddev (>50) suggests a high-contrast object (phone: dark body + bright screen)
+  // Normal clothing/background below face usually has stddev < 35
+  return stddev > 50;
+}
+
+// ── MAIN ANALYSIS LOOP ────────────────────────────────────────────────────
+function startAnalysisLoop() {
+  const video = document.getElementById('webcam-video');
+
+  // Wait for warmup then start analysis every 800ms
+  setTimeout(() => {
+    state.analysisInterval = setInterval(() => sendAnalysis(video), 800);
+  }, 3000);
+}
+
+const _fbCanvas = document.createElement('canvas');
+_fbCanvas.width = 160; _fbCanvas.height = 120;
+const _fbCtx = _fbCanvas.getContext('2d', { willReadFrequently: true });
+
+function detectFaceFallback(video) {
+  if (!video || video.readyState < 2) return false;
+  _fbCtx.drawImage(video, 0, 0, 160, 120);
+  const d = _fbCtx.getImageData(40, 30, 80, 60).data;
+  let skinPixels = 0;
+  for (let i = 0; i < d.length; i += 4) {
+    const r = d[i], g = d[i+1], b = d[i+2];
+    if (r > 50 && g > 30 && b > 15 && r > g && r > b && r - g > 10) skinPixels++;
+  }
+  return skinPixels > 30;
+}
+
+async function sendAnalysis(video) {
+  if (!state.ws || state.ws.readyState !== WebSocket.OPEN || video.readyState < 2) return;
+
+  let faceDetected = false;
+  let gazeDir = 'unknown';
+  let facesCount = 0;
+
+  let faceLandmarks = null;
+  if (mpVisionReady && faceLandmarker) {
+    try {
+      const result = faceLandmarker.detectForVideo(video, performance.now());
+      if (result.faceLandmarks && result.faceLandmarks.length > 0) {
+        faceDetected = true;
+        facesCount = result.faceLandmarks.length;
+        faceLandmarks = result.faceLandmarks[0];
+        gazeDir = estimateGaze(faceLandmarks);
+      }
+    } catch (e) {}
+  }
+  if (!faceDetected) {
+    faceDetected = detectFaceFallback(video);
+  }
+
+  const bgMotion = detectMotion(video);
+  const unusualAudio = checkUnusualAudio();
+  const tabAwayNow = tabAwayStart ? Date.now() - tabAwayStart : 0;
+  const phoneDetected = detectPhoneNearFace(video, faceLandmarks);
+
+  const payload = {
+    type: 'cheating',
+    face_detected: faceDetected,
+    faces_count: facesCount,
+    gaze_direction: gazeDir,
+    tab_switches: tabSwitchCount,
+    tab_away_ms: tabAwayMs + tabAwayNow,
+    background_motion: bgMotion,
+    unusual_audio: unusualAudio,
+    phone_detected: phoneDetected,
+  };
+
+  state.ws.send(JSON.stringify(payload));
+}
+
+// ── CHEATING UI ────────────────────────────────────────────────────────────
+function updateCheatingUI(status) {
+  const faceEl = document.getElementById('face-status');
+  const gazeEl = document.getElementById('gaze-status');
+  const integrityEl = document.getElementById('integrity-score');
+  const alertLog = document.getElementById('alert-log');
+
+  if (status.face_detected) {
+    faceEl.textContent = 'Visible';
+    faceEl.className = 'ok';
+  } else {
+    faceEl.textContent = 'Not visible';
+    faceEl.className = 'danger';
+  }
+
+  gazeEl.textContent = status.gaze_direction || 'unknown';
+  if (status.gaze_direction === 'center') gazeEl.className = 'ok';
+  else if (status.gaze_direction !== 'unknown') gazeEl.className = 'warn';
+  else gazeEl.className = '';
+
+  integrityEl.textContent = status.integrity_score;
+
+  if (status.new_alerts && status.new_alerts.length > 0) {
+    status.new_alerts.forEach(alert => {
+      const div = document.createElement('div');
+      div.className = `alert-item ${alert.severity}`;
+      div.textContent = `[${alert.type}] ${alert.message}`;
+      alertLog.prepend(div);
+    });
+  }
+}
+
+// ── AUDIO RECORDING ────────────────────────────────────────────────────────
+function startRecording() {
+  if (state.isRecording) return;
+  state.isRecording = true;
+
+  const recordBtn = document.getElementById('record-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const timer = document.getElementById('recording-timer');
+  const timerSec = document.getElementById('timer-seconds');
+
+  recordBtn.style.display = 'none';
+  stopBtn.style.display = '';
+  timer.style.display = '';
+  timerSec.textContent = '0';
+
+  state.audioChunks = [];
+  state.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  state.audioSource = state.audioContext.createMediaStreamSource(state.mediaStream);
+  state.audioProcessor = state.audioContext.createScriptProcessor(4096, 1, 1);
+
+  state.audioProcessor.onaudioprocess = (e) => {
+    const input = e.inputBuffer.getChannelData(0);
+    state.audioChunks.push(new Float32Array(input));
+  };
+
+  state.audioSource.connect(state.audioProcessor);
+  state.audioProcessor.connect(state.audioContext.destination);
+
+  let seconds = 0;
+  window._recordingTimerInterval = setInterval(() => {
+    seconds++;
+    timerSec.textContent = seconds;
+  }, 1000);
+}
+
+async function stopRecording() {
+  if (!state.isRecording) return;
+  state.isRecording = false;
+
+  const recordBtn = document.getElementById('record-btn');
+  const stopBtn = document.getElementById('stop-btn');
+  const timer = document.getElementById('recording-timer');
+
+  recordBtn.style.display = '';
+  stopBtn.style.display = 'none';
+  timer.style.display = 'none';
+  recordBtn.disabled = true;
+  recordBtn.textContent = 'Processing...';
+
+  if (window._recordingTimerInterval) {
+    clearInterval(window._recordingTimerInterval);
+  }
+
+  if (state.audioSource && state.audioProcessor) {
+    state.audioSource.disconnect();
+    state.audioProcessor.disconnect();
+  }
+  if (state.audioContext && state.audioContext.state !== 'closed') {
+    await state.audioContext.close();
+  }
+
+  const totalLength = state.audioChunks.reduce((sum, c) => sum + c.length, 0);
+  if (totalLength === 0) {
+    showError('interview-error', 'No audio captured. Please try again.');
+    recordBtn.disabled = false;
+    recordBtn.textContent = 'Start Recording';
+    return;
+  }
+
+  const allSamples = new Float32Array(totalLength);
+  let offset = 0;
+  for (const chunk of state.audioChunks) {
+    allSamples.set(chunk, offset);
+    offset += chunk.length;
+  }
+
+  const sampleRate = state.audioContext ? state.audioContext.sampleRate : 48000;
+  const wavBlob = encodeWAV(allSamples, sampleRate);
+
+  const formData = new FormData();
+  formData.append('audio', wavBlob, 'answer.wav');
+
+  try {
+    const data = await handleResponse(await fetch(`${BASE}/api/answer/${state.sessionId}`, { method: 'POST', body: formData }));
+
+    showError('interview-error', null);
+
+    // Show transcript
+    const transcriptBox = document.getElementById('transcript-box');
+    const transcriptText = document.getElementById('transcript-text');
+    transcriptBox.style.display = '';
+    transcriptText.textContent = data.transcript || '(empty)';
+
+    // Update progress
+    const progressFill = document.getElementById('progress-fill');
+    const progress = (data.turn / data.total_turns) * 100;
+    progressFill.style.width = progress + '%';
+
+    if (data.is_last_turn) {
+      recordBtn.style.display = 'none';
+      stopBtn.style.display = 'none';
+      setTimeout(() => scoreInterview(), 1000);
+    } else {
+      // Play next question audio
+      playAudioAndShowQuestion(data.next_question, data.next_audio_url);
+    }
+  } catch (err) {
+    showError('interview-error', 'Network error: ' + err.message);
+  }
+
+  recordBtn.disabled = false;
+  recordBtn.textContent = 'Start Recording';
+}
+
+// ── AUDIO PLAYBACK ─────────────────────────────────────────────────────────
+function playAudioAndShowQuestion(question, audioUrl) {
+  const questionText = document.getElementById('question-text');
+  const meta = document.getElementById('question-meta');
+  questionText.textContent = question || 'No question available';
+  meta.textContent = '';
+
+  const turnNum = document.getElementById('turn-number');
+  turnNum.textContent = state.turnCount || '1';
+
+  if (audioUrl) {
+    const fullUrl = audioUrl.startsWith('http') ? audioUrl : BASE + audioUrl;
+    const audio = new Audio(fullUrl);
+    audio.play().catch(() => {});
+  }
+}
+
+// ── SCORING ────────────────────────────────────────────────────────────────
+async function scoreInterview() {
+  showScreen('screen-scoring');
+
+  try {
+    const data = await handleResponse(await fetch(`${BASE}/api/score/${state.sessionId}`, { method: 'POST' }));
+    displayResults(data);
+  } catch (err) {
+    showScreen('screen-interview');
+    showError('interview-error', 'Network error: ' + err.message);
+  }
+}
+
+function displayResults(data) {
+  const sr = data.score_report;
+  const cr = data.cheating_report;
+  const bar = data.hiring_bar;
+
+  document.getElementById('overall-score').textContent = sr.overall_score;
+
+  // Axis scores
+  const axisContainer = document.getElementById('axis-scores');
+  axisContainer.innerHTML = '';
+  const axes = ['communication', 'technical', 'problem_solving', 'behavioral', 'delivery'];
+  axes.forEach(axis => {
+    const score = sr.scores_per_axis[axis];
+    const gap = sr.gap_vs_bar[axis];
+    const barVal = bar[axis];
+    const pct = score + '%';
+    let cls = 'bad';
+    if (score >= 70) cls = 'good';
+    else if (score >= 50) cls = 'ok';
+
+    const row = document.createElement('div');
+    row.className = 'axis-row';
+    row.innerHTML = `
+      <div class="axis-name">${axis}</div>
+      <div class="axis-bar-bg"><div class="axis-bar-fill ${cls}" style="width:${pct}"></div></div>
+      <div class="axis-score-text">${score}</div>
+      <div class="axis-gap">bar: ${barVal} (${gap >= 0 ? '+' : ''}${gap})</div>
+    `;
+    axisContainer.appendChild(row);
+  });
+
+  // Strong moment
+  const strongEl = document.getElementById('strong-moment');
+  strongEl.innerHTML = `
+    <h3>Strong Moment</h3>
+    <div class="quote">"${sr.strong_moment.quote}"</div>
+    <div class="why">${sr.strong_moment.why_it_helped}</div>
+  `;
+
+  // Weak moment
+  const weakEl = document.getElementById('weak-moment');
+  weakEl.innerHTML = `
+    <h3>Area for Improvement</h3>
+    <div class="quote">"${sr.weak_moment.quote}"</div>
+    <div class="why">${sr.weak_moment.why_it_hurt}</div>
+  `;
+
+  // Next action
+  document.getElementById('next-action').innerHTML = `
+    <h3>Recommended Next Action</h3>
+    <p>${sr.next_action}</p>
+  `;
+
+  // Integrity report
+  const integrityEl = document.getElementById('integrity-report');
+  let riskClass = 'risk-low';
+  if (cr.risk_level === 'MEDIUM') riskClass = 'risk-medium';
+  if (cr.risk_level === 'HIGH') riskClass = 'risk-high';
+  if (cr.risk_level === 'CRITICAL') riskClass = 'risk-critical';
+
+  let alertsHtml = '';
+  if (cr.alert_breakdown) {
+    Object.entries(cr.alert_breakdown).forEach(([type, count]) => {
+      alertsHtml += `<div class="row"><span>${type}</span><span>${count}</span></div>`;
+    });
+  }
+
+  integrityEl.innerHTML = `
+    <h3>Integrity Report</h3>
+    <div class="row"><span>Integrity Score</span><span>${cr.integrity_score}/100</span></div>
+    <div class="row"><span>Risk Level</span><span class="${riskClass}">${cr.risk_level}</span></div>
+    <div class="row"><span>Total Alerts</span><span>${cr.total_alerts}</span></div>
+    <div class="row"><span>Frames Analyzed</span><span>${cr.frames_analyzed}</span></div>
+    ${cr.alert_breakdown ? alertsHtml : ''}
+  `;
+
+  showScreen('screen-results');
+}
+
+// ── START INTERVIEW ────────────────────────────────────────────────────────
+async function startInterview(formData) {
+  showError('setup-error', null);
+  const startBtn = document.getElementById('start-btn');
+  startBtn.disabled = true;
+  startBtn.textContent = 'Starting...';
+
+  try {
+    const cat = formData.get('category');
+    const roleKey = formData.get('role_key');
+    const roleTitle = document.querySelector('#role-select option:checked').textContent;
+    const body = {
+      role_key: roleKey,
+      category: cat,
+      target_role: roleTitle,
+      icp_type: document.getElementById('icp-type-input').value,
+      round_type: formData.get('round_type'),
+      company_tier: formData.get('company_tier'),
+      language: formData.get('language'),
+      max_turns: parseInt(formData.get('max_turns')) || 3,
+    };
+
+    const res = await fetch(`${BASE}/api/start`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const startData = await handleResponse(res);
+
+    state.sessionId = startData.session_id;
+    state.profile = body;
+    state.turnCount = 0;
+
+    showScreen('screen-interview');
+
+    // Start webcam (gracefully handle denial)
+    try { await startWebcam(); } catch (e) { console.warn('Webcam not available:', e); }
+
+    // Initialize MediaPipe (non-blocking)
+    initMediaPipe().catch(e => {
+      console.warn('MediaPipe init error:', e);
+      document.getElementById('face-status').textContent = 'unavailable';
+    });
+
+    // Connect WebSocket
+    try { connectWebSocket(state.sessionId); } catch (e) { console.warn('WebSocket error:', e); }
+
+    // Play opening audio, then fetch first question (no overlap)
+    if (startData.opening_audio_url) {
+      const audio = new Audio(BASE + startData.opening_audio_url);
+      await audio.play();
+    }
+    await fetchNextQuestion();
+  } catch (err) {
+    showError('setup-error', 'Error: ' + err.message);
+  }
+
+  startBtn.disabled = false;
+  startBtn.textContent = 'Start Interview';
+}
+
+async function fetchNextQuestion() {
+  try {
+    const data = await handleResponse(await fetch(`${BASE}/api/question/${state.sessionId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}',
+    }));
+
+    state.turnCount = data.turn || (state.turnCount || 0) + 1;
+
+    document.getElementById('turn-number').textContent = state.turnCount;
+    document.getElementById('total-turns').textContent = data.total_turns;
+    document.getElementById('question-text').textContent = data.question;
+    document.getElementById('question-meta').textContent =
+      `${data.question_type} · difficulty ${data.difficulty_level}/5 · ${data.reasoning}`;
+
+    const progressFill = document.getElementById('progress-fill');
+    const prevTurn = state.turnCount - 1;
+    const progress = ((prevTurn) / data.total_turns) * 100;
+    progressFill.style.width = progress + '%';
+
+    if (data.audio_url) {
+      const audio = new Audio(BASE + data.audio_url);
+      audio.play().catch(() => {});
+    }
+
+    // Re-enable recording
+    document.getElementById('record-btn').style.display = '';
+    document.getElementById('record-btn').disabled = false;
+    document.getElementById('record-btn').textContent = 'Start Recording';
+    document.getElementById('stop-btn').style.display = 'none';
+    document.getElementById('recording-timer').style.display = 'none';
+    showError('interview-error', null);
+  } catch (err) {
+    showError('interview-error', 'Error: ' + err.message);
+  }
+}
+
+// ── EVENT BINDINGS ─────────────────────────────────────────────────────────
+
+document.getElementById('start-btn').addEventListener('click', () => {
+  const formData = new FormData(document.getElementById('setup-form'));
+  startInterview(formData);
+});
+
+document.getElementById('record-btn').addEventListener('click', startRecording);
+document.getElementById('stop-btn').addEventListener('click', stopRecording);
+
+// Role definitions
+const ROLE_DEFAULTS = {
+  software_engineer: { icp: 'high_wage', lang: 'en', round: 'screening', tier: 'mid', cat: 'technical' },
+  ai_engineer:       { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  data_scientist:    { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  iot_engineer:      { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  frontend_engineer: { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  backend_engineer:  { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  devops_engineer:   { icp: 'high_wage', lang: 'en', round: 'technical', tier: 'mid', cat: 'technical' },
+  product_manager:   { icp: 'high_wage', lang: 'en', round: 'behavioral', tier: 'enterprise', cat: 'technical' },
+  cx_associate:      { icp: 'low_wage', lang: 'hi', round: 'behavioral', tier: 'startup', cat: 'cx' },
+  customer_support:  { icp: 'low_wage', lang: 'hi', round: 'behavioral', tier: 'startup', cat: 'cx' },
+  office_assistant:  { icp: 'low_wage', lang: 'hi', round: 'screening', tier: 'startup', cat: 'cx' },
+  data_entry_operator: { icp: 'low_wage', lang: 'hi', round: 'screening', tier: 'startup', cat: 'cx' },
+  bpo_executive:     { icp: 'low_wage', lang: 'hi', round: 'behavioral', tier: 'startup', cat: 'cx' },
+};
+
+const CATEGORY_ROLES = {
+  technical: [
+    { key: 'software_engineer', label: 'Software Engineer' },
+    { key: 'ai_engineer',       label: 'AI / ML Engineer' },
+    { key: 'data_scientist',    label: 'Data Scientist' },
+    { key: 'iot_engineer',      label: 'IoT / Embedded Engineer' },
+    { key: 'frontend_engineer', label: 'Frontend Engineer' },
+    { key: 'backend_engineer',  label: 'Backend Engineer' },
+    { key: 'devops_engineer',   label: 'DevOps Engineer' },
+    { key: 'product_manager',   label: 'Product Manager' },
+  ],
+  cx: [
+    { key: 'cx_associate',       label: 'CX Associate' },
+    { key: 'customer_support',   label: 'Customer Support Executive' },
+    { key: 'office_assistant',   label: 'Office Assistant' },
+    { key: 'data_entry_operator', label: 'Data Entry Operator' },
+    { key: 'bpo_executive',      label: 'BPO / Call Center Executive' },
+  ],
+};
+
+function populateRoles(category) {
+  const sel = document.querySelector('select[name="role_key"]');
+  const roles = CATEGORY_ROLES[category] || CATEGORY_ROLES.technical;
+  sel.innerHTML = roles.map(r => `<option value="${r.key}">${r.label}</option>`).join('');
+  sel.dispatchEvent(new Event('change'));
+}
+
+document.querySelector('select[name="category"]').addEventListener('change', (e) => {
+  populateRoles(e.target.value);
+});
+
+document.querySelector('select[name="role_key"]').addEventListener('change', (e) => {
+  const def = ROLE_DEFAULTS[e.target.value];
+  if (!def) return;
+  document.getElementById('icp-type-input').value = def.icp;
+  document.querySelector('select[name="language"]').value = def.lang;
+  document.querySelector('select[name="round_type"]').value = def.round;
+  document.querySelector('select[name="company_tier"]').value = def.tier;
+});
+
+// Populate on load
+populateRoles('technical');
+</script>
+
+</body>
+</html>

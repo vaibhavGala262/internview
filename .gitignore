@@ -4,3 +4,5 @@ __pycache__/
 **/__pycache__/
 *.pyc
 *.zip
+interview-ai/web/static/*.mp3
+interview-ai/web/chroma_db/
